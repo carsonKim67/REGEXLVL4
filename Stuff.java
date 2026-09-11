@@ -1,12 +1,7 @@
 //Carson Kim 9/10/26
 //This code scans through the text and finds all the small letters surrounded by exactly three big letters
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.io.File;                  // Import the File class
-import java.io.FileNotFoundException; // Import this class to handle errors
-import java.util.Scanner;             // Import the Scanner class to read text files
-package stuff;
+          // Import the Scanner class to read text files
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,10 +17,15 @@ public class Stuff {
          
 
 
-         Pattern pat = Pattern.compile("[/d]+"); // step 1 compile your pattern
-             Matcher mat = pat.matcher(data); //step 2 set up your matcher
+         Pattern pat = Pattern.compile("[\\d]+"); // step 1 compile your pattern
+             Matcher mat = pat.matcher(line); //step 2 set up your matcher
              while(mat.find()) {//step 3 look through until you find a match
-                  url= new Url("https://www.pythonchallenge.com/pc/def/linkedlist.php?nothing="+"line");
+                  line = mat.group();
+                  url= new URL("https://www.pythonchallenge.com/pc/def/linkedlist.php?nothing="+line);
+                  reader = new BufferedReader(new InputStreamReader(url.openStream()));
+                  line = reader.readLine();
+                  System.out.println(line);
+                  mat = pat.matcher(line);
              }
        }
 }
